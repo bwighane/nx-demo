@@ -1,27 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { Message } from '@enix/api-interfaces';
+import styled from 'styled-components';
+import axios from 'axios';
+import faker from 'faker';
 
-export const App = () => {
-  const [m, setMessage] = useState<Message>({ message: '' });
+const Centre = styled.div`
+  text-align: center;
+`;
 
-  useEffect(() => {
-    fetch('/api')
-      .then(r => r.json())
-      .then(setMessage);
-  }, []);
-
-  return (
-    <>
-      <div style={{ textAlign: 'center' }}>
-        <h1>Welcome to enix!</h1>
-        <img
-          width="450"
-          src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
-        />
-      </div>
-      <div>{m.message}</div>
-    </>
-  );
-};
+interface AppProps {
+  name: string;
+}
+class App extends React.PureComponent<AppProps> {
+  sendMessage() {
+    const name = faker.name.findName();
+    console.log(name);
+    axios({
+      url: 'http://localhost:3333/api',
+      method: 'POST',
+      data: {
+        name
+      }
+    });
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <Centre>
+          <h1>Welcome</h1>
+          <button onClick={this.sendMessage}>Send Message</button>
+        </Centre>
+      </React.Fragment>
+    );
+  }
+}
 
 export default App;

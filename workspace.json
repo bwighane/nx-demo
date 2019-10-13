@@ -189,6 +189,118 @@
           }
         }
       }
+    },
+    "rbt-rbt": {
+      "root": "apps/rbt/rbt",
+      "sourceRoot": "apps/rbt/rbt/src",
+      "projectType": "application",
+      "prefix": "rbt-rbt",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/rbt/rbt",
+            "main": "apps/rbt/rbt/src/main.ts",
+            "tsConfig": "apps/rbt/rbt/tsconfig.app.json",
+            "assets": ["apps/rbt/rbt/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/rbt/rbt/src/environments/environment.ts",
+                  "with": "apps/rbt/rbt/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "rbt-rbt:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/rbt/rbt/.eslintrc",
+            "tsConfig": [
+              "apps/rbt/rbt/tsconfig.app.json",
+              "apps/rbt/rbt/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/rbt/rbt/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/rbt/rbt/jest.config.js",
+            "tsConfig": "apps/rbt/rbt/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "bwi": {
+      "root": "apps/bwi",
+      "sourceRoot": "apps/bwi/src",
+      "projectType": "application",
+      "prefix": "bwi",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/bwi",
+            "main": "apps/bwi/src/main.ts",
+            "tsConfig": "apps/bwi/tsconfig.app.json",
+            "assets": ["apps/bwi/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/bwi/src/environments/environment.ts",
+                  "with": "apps/bwi/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "bwi:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/bwi/.eslintrc",
+            "tsConfig": [
+              "apps/bwi/tsconfig.app.json",
+              "apps/bwi/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/bwi/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/bwi/jest.config.js",
+            "tsConfig": "apps/bwi/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {
